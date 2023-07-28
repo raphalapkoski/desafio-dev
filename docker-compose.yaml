@@ -1,0 +1,32 @@
+version: '3.4'
+
+networks:
+    desafiodevapi:
+ 
+services:
+  desafiodevdb:
+    container_name: desafio-dev-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 8002:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P@ssword123
+    networks:
+      - desafiodevapi 
+  desafiodevserver:
+    container_name: desafio-dev-server
+    image: ${DOCKER_REGISTRY-}desafiodevserver
+    build:
+      context: .
+      dockerfile: src\01 -Api\DesafioDev.Api\Dockerfile
+    ports:
+      - 8001:80
+    depends_on:
+      - desafiodevdb
+    environment:
+      - DB_HOST=desafiodevdb
+      - DB_NAME=DesafioDev
+      - DB_SA_PASSWORD=P@ssword123
+    networks:
+      - desafiodevapi 
