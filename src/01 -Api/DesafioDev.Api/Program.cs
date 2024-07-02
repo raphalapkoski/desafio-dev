@@ -18,11 +18,6 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "DesafioDev",
         Version = "v1",
-        Contact = new OpenApiContact
-        {
-            Name = "João Vitor",
-            Email = "jvkprojetos@outlook.com"
-        },
         Description = "DevChallenge: to integrate your system with our api, follow the end-points guide below, which contains the type, request body, return types and type of data expected in the operation."
     });
     c.EnableAnnotations();
